@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join JobsyFi AI - Student Interest Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;300;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2D7D5F;
+            --primary-light: #4A9B7E;
+            --accent-color: #C5E4D8;
+            --secondary-color: #E6F3F0;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-light: #718096;
+            --success-color: #38a169;
+            --error-color: #e53e3e;
+            --border-color: #e2e8f0;
+            --gradient: linear-gradient(135deg, #E6F3F0 0%, #D1E7DD 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--gradient);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(45, 125, 95, 0.1);
+            margin-bottom: 1rem;
+            border: 2px solid var(--accent-color);
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+
+        .logo-ai {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-light);
+            background: var(--accent-color);
+            padding: 2px 8px;
+            border-radius: 8px;
+            position: relative;
+            top: -2px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(45, 125, 95, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--accent-color);
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            color: var(--text-primary);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(45, 125, 95, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px;
+            background: var(--secondary-color);
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--accent-color);
+            background: #f0f9f6;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            transform: scale(1.2);
+            accent-color: var(--primary-color);
+        }
+
+        .checkbox-content {
+            flex: 1;
+        }
+
+        .checkbox-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .checkbox-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .radio-item {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .radio-item input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .radio-label {
+            display: block;
+            padding: 12px 16px;
+            background: var(--secondary-color);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 300;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .radio-item input[type="radio"]:checked + .radio-label {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .radio-item:hover .radio-label {
+            border-color: var(--accent-color);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(45, 125, 95, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid var(--success-color);
+            color: var(--success-color);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-message {
+            background: #fed7d7;
+            border: 2px solid var(--error-color);
+            color: var(--error-color);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .feature-highlight {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .coupon-banner {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 32px rgba(238, 90, 36, 0.3);
+            border: 2px solid #ff9f43;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coupon-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .coupon-banner h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .coupon-amount {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 0.5rem 0;
+        }
+
+        .coupon-text {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 300;
+        }
+
+        .terms-text {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.7rem;
+            }
+
+            .header p {
+                font-size: 0.95rem;
+            }
+
+            .form-card {
+                padding: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+
+            .radio-group {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .logo {
+                padding: 6px 12px;
+            }
+
+            .logo-text {
+                font-size: 18px;
+            }
+
+            .logo-ai {
+                font-size: 12px;
+            }
+
+            .form-card {
+                padding: 0.75rem;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-text">JobsyFi</span>
+                <span class="logo-ai">AI</span>
+            </div>
+            <h1>Join the Future of Career Success!</h1>
+            <p>Thank you for attending our demo! We're excited to help you accelerate your career journey with AI-powered tools. Share your details below to get early access when we launch this very soon.</p>
+        </header>
+
+        <!-- Coupon Banner -->
+        <div class="coupon-banner pulse">
+            <h3>🎉 Early Bird Special Offer!</h3>
+            <div class="coupon-amount">₹300 FREE</div>
+            <div class="coupon-text">Registration Coupons for Early Signups!</div>
+            <p style="margin: 0.5rem 0; font-weight: 600;">Fill this form now and get ₹300 worth credits when we launch!</p>
+            <div class="terms-text">*T&C Applied - Valid for limited registrations only. Coupons will be sent via email upon launch.</div>
+        </div>
+
+        <!-- Registration Form -->
+        <form id="studentForm" class="form-card">
+            <!-- Personal Information -->
+            <div class="section-title">
+                <i class="fas fa-user"></i>
+                Your Details
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="college">College/University *</label>
+                    <input type="text" id="college" name="college" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="course">Course/Branch *</label>
+                    <select id="course" name="course" required>
+                        <option value="">Select your course</option>
+                        <option value="Computer Science">Computer Science Engineering</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Electronics">Electronics & Communication</option>
+                        <option value="Mechanical">Mechanical Engineering</option>
+                        <option value="Civil">Civil Engineering</option>
+                        <option value="Electrical">Electrical Engineering</option>
+                        <option value="MBA">MBA</option>
+                        <option value="BBA">BBA</option>
+                        <option value="B.Com">B.Com</option>
+                        <option value="B.Sc">B.Sc</option>
+                        <option value="M.Sc">M.Sc</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="graduationYear">Graduation Year *</label>
+                    <select id="graduationYear" name="graduationYear" required>
+                        <option value="">Select year</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Current Status -->
+            <div class="form-group">
+                <label>Current Status *</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="final-year" name="currentStatus" value="Final Year Student" required>
+                        <label for="final-year" class="radio-label">Final Year</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="pre-final" name="currentStatus" value="Pre-Final Year" required>
+                        <label for="pre-final" class="radio-label">Pre-Final Year</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="second-year" name="currentStatus" value="Second Year" required>
+                        <label for="second-year" class="radio-label">Second Year</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="first-year" name="currentStatus" value="First Year" required>
+                        <label for="first-year" class="radio-label">First Year</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interest Level -->
+            <div class="form-group">
+                <label>How interested are you in using JobsyFi AI? *</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="very-interested" name="interestLevel" value="Very Interested - Will definitely use" required>
+                        <label for="very-interested" class="radio-label">Very Interested</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="interested" name="interestLevel" value="Interested - Likely to use" required>
+                        <label for="interested" class="radio-label">Interested</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="somewhat" name="interestLevel" value="Somewhat Interested" required>
+                        <label for="somewhat" class="radio-label">Somewhat</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="maybe" name="interestLevel" value="Maybe - Need to know more" required>
+                        <label for="maybe" class="radio-label">Maybe</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Early Access -->
+            <div class="form-group">
+                <label>Would you like early access when we launch? *</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="yes-early" name="earlyAccess" value="Yes, notify me immediately" required>
+                        <label for="yes-early" class="radio-label">Yes, Notify Me</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="maybe-early" name="earlyAccess" value="Maybe, keep me informed" required>
+                        <label for="maybe-early" class="radio-label">Keep Me Informed</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="no-early" name="earlyAccess" value="No, I'll check later" required>
+                        <label for="no-early" class="radio-label">I'll Check Later</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- Feature Interest Survey -->
+        <div class="form-card">
+            <div class="section-title">
+                <i class="fas fa-star"></i>
+                Which Features Excited You Most?
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Select all features that you found interesting during the demo:</p>
+            
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="ats-analysis" name="interestedFeatures" value="ATS Analysis">
+                    <div class="checkbox-content">
+                        <div class="checkbox-title">🎯 ATS Analysis</div>
+                        <div class="checkbox-description">Get detailed analysis of how well your resume passes Applicant Tracking Systems</div>
+                    </div>
+                </div>
+                
+                <div class="checkbox-item">
+                    <input type="checkbox" id="ai-resume-tailoring" name="interestedFeatures" value="AI Resume Tailoring">
+                    <div class="checkbox-content">
+                        <div class="checkbox-title">🤖 AI Resume Tailoring</div>
+                        <div class="checkbox-description">AI-powered resume customization for specific job descriptions</div>
+                    </div>
+                </div>
+                
+                <div class="checkbox-item">
+                    <input type="checkbox" id="practice-interviews" name="interestedFeatures" value="Practice Interview">
+                    <div class="checkbox-content">
+                        <div class="checkbox-title">� Practice Interviews</div>
+                        <div class="checkbox-description">Mock interview sessions with AI feedback and scoring</div>
+                    </div>
+                </div>
+                
+                <div class="checkbox-item">
+                    <input type="checkbox" id="ai-content-suggestions" name="interestedFeatures" value="AI Content Suggestions">
+                    <div class="checkbox-content">
+                        <div class="checkbox-title">✨ AI Content Suggestions</div>
+                        <div class="checkbox-description">Smart suggestions to improve resume content and impact</div>
+                    </div>
+                </div>
+                
+                <div class="checkbox-item">
+                    <input type="checkbox" id="enterprise-reporting" name="interestedFeatures" value="Enterprise Reporting">
+                    <div class="checkbox-content">
+                        <div class="checkbox-title">📊 Enterprise Reporting</div>
+                        <div class="checkbox-description">Analytics and insights for placement officers and HR teams</div>
+                    </div>
+                </div>
+                
+                <div class="checkbox-item">
+                    <input type="checkbox" id="premium-exports" name="interestedFeatures" value="Premium Resume Exports">
+                    <div class="checkbox-content">
+                        <div class="checkbox-title">� Premium Resume Exports</div>
+                        <div class="checkbox-description">High-quality PDF exports with professional templates</div>
+                    </div>
+                </div>
+                
+                <div class="checkbox-item">
+                    <input type="checkbox" id="credit-system" name="interestedFeatures" value="Pay-per-Use Credit System">
+                    <div class="checkbox-content">
+                        <div class="checkbox-title">� Flexible Credit System</div>
+                        <div class="checkbox-description">Pay only for what you use with our credit-based pricing</div>
+                    </div>
+                </div>
+                
+                <div class="checkbox-item">
+                    <input type="checkbox" id="free-features" name="interestedFeatures" value="Free Tier Usage">
+                    <div class="checkbox-content">
+                        <div class="checkbox-title">� Free Tier Access</div>
+                        <div class="checkbox-description">Generous free usage limits to get started without payment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback Section -->
+        <div class="form-card">
+            <div class="section-title">
+                <i class="fas fa-comments"></i>
+                Quick Feedback
+            </div>
+
+            <div class="form-group">
+                <label for="mostImpressive">What impressed you the most about JobsyFi AI?</label>
+                <textarea id="mostImpressive" name="mostImpressive" placeholder="Tell us what caught your attention during the demo..." rows="2"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="willingness">How likely are you to recommend JobsyFi to your friends? *</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="definitely-recommend" name="willingness" value="Definitely will recommend" required>
+                        <label for="definitely-recommend" class="radio-label">Definitely Will</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="probably-recommend" name="willingness" value="Probably will recommend" required>
+                        <label for="probably-recommend" class="radio-label">Probably Will</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="maybe-recommend" name="willingness" value="Maybe will recommend" required>
+                        <label for="maybe-recommend" class="radio-label">Maybe</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="unlikely-recommend" name="willingness" value="Unlikely to recommend" required>
+                        <label for="unlikely-recommend" class="radio-label">Unlikely</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Which pricing model would you prefer? *</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="free-tier" name="pricingPreference" value="Free tier with limited features" required>
+                        <label for="free-tier" class="radio-label">Free Tier</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="pay-per-use" name="pricingPreference" value="Pay-per-use with credits" required>
+                        <label for="pay-per-use" class="radio-label">Pay-per-Use</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="monthly-subscription" name="pricingPreference" value="Monthly subscription" required>
+                        <label for="monthly-subscription" class="radio-label">Monthly Plan</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="college-plan" name="pricingPreference" value="College-sponsored access" required>
+                        <label for="college-plan" class="radio-label">College-Sponsored</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="additionalComments">Any questions or suggestions? (Optional)</label>
+                <textarea id="additionalComments" name="additionalComments" placeholder="Any other thoughts, questions, or feedback..." rows="2"></textarea>
+            </div>
+
+            <button type="submit" form="studentForm" class="submit-btn" id="submitBtn">
+                <span id="submitText">🎁 Claim My ₹300 Coupon - Register Now!</span>
+            </button>
+
+            <div id="errorMessage" class="error-message">
+                <strong>Oops!</strong> <span id="errorText"></span>
+            </div>
+
+            <div id="successMessage" class="success-message">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🎉</div>
+                <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Congratulations! Your ₹300 Coupon is Reserved!</h3>
+                <p style="margin-bottom: 1rem; font-weight: 600; color: #e53e3e;">✅ You've successfully registered for early access with exclusive ₹300 registration coupons!</p>
+                <p style="margin-bottom: 1rem;">Your response has been recorded successfully. We'll notify you as soon as JobsyFi AI is ready for launch and send your exclusive coupon code!</p>
+                <p><strong>Keep an eye on your email</strong> - we'll send you your ₹300 coupon code and early access opportunities.</p>
+                <div style="margin-top: 1rem; padding: 1rem; background: #f0fff4; border-radius: 8px; border: 1px solid #38a169;">
+                    <small style="color: #2f855a;"><strong>Terms & Conditions:</strong> Coupon valid for first few registrations. Coupons will be emailed upon platform launch. Cannot be combined with other offers. Valid for 6 months from issue date.</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2024 JobsyFi AI - Accelerating Careers with Artificial Intelligence</p>
+            <p>Questions? Contact us at <strong>info@JobsyFi.ai</strong></p>
+            <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(45, 125, 95, 0.1); border-radius: 8px; border: 1px dashed var(--primary-color);">
+                <small style="color: var(--primary-color); font-weight: 600;">🎁 Limited Time: First few registrations get ₹300 free coupons! Don't miss out!</small>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Google Sheets Integration
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxZKsEPS2OiK739KSLHijn4OIV0Kgts0Mnhwu_WSZbCEfobVMlt_-hGts3_Cdyz0dziHg/exec'; // Replace with your actual URL
+
+        document.getElementById('studentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitText.innerHTML = '<div class="loading-spinner"></div>Submitting...';
+            errorMessage.style.display = 'none';
+            
+            try {
+                // Collect form data
+                const formData = new FormData(this);
+                
+                // Collect all checkbox values for interested features
+                const interestedFeatures = [];
+                document.querySelectorAll('input[name="interestedFeatures"]:checked').forEach(checkbox => {
+                    interestedFeatures.push(checkbox.value);
+                });
+                
+                // Prepare data object
+                const data = {
+                    timestamp: new Date().toISOString(),
+                    fullName: formData.get('fullName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone') || 'Not provided',
+                    college: formData.get('college'),
+                    course: formData.get('course'),
+                    graduationYear: formData.get('graduationYear'),
+                    currentStatus: formData.get('currentStatus'),
+                    interestLevel: formData.get('interestLevel'),
+                    interestedFeatures: interestedFeatures.join(', ') || 'None selected',
+                    mostImpressive: formData.get('mostImpressive') || 'Not provided',
+                    concerns: 'Not collected', // Simplified form doesn't collect this
+                    willingness: formData.get('willingness'),
+                    pricingPreference: formData.get('pricingPreference'),
+                    earlyAccess: formData.get('earlyAccess'),
+                    additionalComments: formData.get('additionalComments') || 'None'
+                };
+                
+                // For now, we'll log the data (replace with actual Google Sheets submission)
+                console.log('Student Interest Data:', data);
+                
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // For demo purposes, always show success
+                // In production, you would submit to Google Sheets here
+                if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                    // Actual Google Sheets submission
+                    const response = await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors', // Required for Google Apps Script
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+                    
+                    // Since we're using no-cors mode, we can't read the response
+                    // We'll assume success if no error is thrown
+                }
+                
+                // Hide all form sections
+                document.querySelectorAll('.form-card').forEach(card => {
+                    card.style.display = 'none';
+                });
+                
+                // Show success message
+                successMessage.classList.add('show');
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                console.error('Submission error:', error);
+                errorMessage.style.display = 'block';
+                document.getElementById('errorText').textContent = 'Failed to submit form. Please try again or contact us directly.';
+                
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitText.innerHTML = '🎁 Claim My ₹300 Coupon - Register Now!';
+            }
+        });
+
+        // Form validation helpers
+        document.querySelectorAll('input[required], select[required]').forEach(field => {
+            field.addEventListener('blur', validateField);
+            field.addEventListener('change', validateField);
+        });
+
+        function validateField(e) {
+            const field = e.target;
+            const isValid = field.checkValidity();
+            
+            if (!isValid) {
+                field.style.borderColor = 'var(--error-color)';
+            } else {
+                field.style.borderColor = 'var(--border-color)';
+            }
+        }
+
+        // Auto-hide error message when user starts typing
+        document.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('input', () => {
+                document.getElementById('errorMessage').style.display = 'none';
+            });
+        });
+
+        // Add smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
